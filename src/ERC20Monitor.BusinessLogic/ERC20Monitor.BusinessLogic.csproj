@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>DLTech.ERC20Monitor.BusinessLogic</RootNamespace>
+    <AssemblyName>DLTech.ERC20Monitor.BusinessLogic</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\dltechCompromised.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ERC20Monitor.DataAccess\ERC20Monitor.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\dltechCompromised.snk" Link="dltechCompromised.snk" />
+  </ItemGroup>
+
+</Project>

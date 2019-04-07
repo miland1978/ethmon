@@ -1,0 +1,5 @@
+﻿Add-Migration -StartupProject DbMigrator -Project ERC20Monitor.DataAccess -Context Context -OutputDir Migrations <Name>
+
+Remove-Migration -StartupProject DbMigrator -Project ERC20Monitor.DataAccess -Context Context
+
+Update-Database -StartupProject DbMigrator -Project ERC20Monitor.DataAccess -Context Context

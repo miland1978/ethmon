@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>52525808-9004-4034-981e-2fae87a278de</UserSecretsId>
+    <RootNamespace>DLTech.DbMigrator</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\dltechCompromised.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ERC20Monitor.DataAccess\ERC20Monitor.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\dltechCompromised.snk" Link="dltechCompromised.snk" />
+  </ItemGroup>
+
+</Project>

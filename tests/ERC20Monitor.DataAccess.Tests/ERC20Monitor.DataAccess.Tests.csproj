@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>DLTech.ERC20Monitor.DataAccess.Tests</RootNamespace>
+    <AssemblyName>DLTech.ERC20Monitor.DataAccess.Tests</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\dltechCompromised.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ERC20Monitor.DataAccess\ERC20Monitor.DataAccess.csproj" />
+    <ProjectReference Include="..\TestUtils\TestUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\dltechCompromised.snk" Link="dltechCompromised.snk" />
+  </ItemGroup>
+
+</Project>

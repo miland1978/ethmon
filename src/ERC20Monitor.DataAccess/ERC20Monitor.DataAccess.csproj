@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>DLTech.ERC20Monitor.DataAccess</RootNamespace>
+    <AssemblyName>DLTech.ERC20Monitor.DataAccess</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\dltechCompromised.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\dltechCompromised.snk" Link="dltechCompromised.snk" />
+    <Compile Remove="Migrations\20190407110743_Initial.cs" />
+  </ItemGroup>
+
+</Project>

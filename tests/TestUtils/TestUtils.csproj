@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>DLTech.TestUtils</AssemblyName>
+    <RootNamespace>DLTech.TestUtils</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\dltechCompromised.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\dltechCompromised.snk" Link="dltechCompromised.snk" />
+  </ItemGroup>
+
+</Project>
