@@ -13,10 +13,6 @@
     "sqlserverAdminLoginPassword": {
       "type": "securestring"
     },
-    "sqlDatabaseName": {
-      "type": "string",
-      "minLength": 1
-    },
     "sqlDatabaseCollation": {
       "type": "string",
       "minLength": 1,
@@ -46,9 +42,22 @@
       "metadata": {
         "description": "Describes the performance level for Edition"
       }
+    },
+    "appObjectId": {
+      "type": "string",
+      "minLength": 36
+    },
+    "envName": {
+      "type": "string",
+      "minLength": 3
     }
   },
   "variables": {
+    "databaseName": "[concat(parameters('envName'), '-sqldb')]",
+    "vaultName": "[concat(parameters('envName'), '-vault')]",
+    "connStringSuffix": ";MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "connStringMiddle": "[concat(',1433;Initial Catalog=' , variables('databaseName'), ';Persist Security Info=False;User ID=', parameters('sqlserverAdminLogin'), ';Password=', parameters('sqlserverAdminLoginPassword'))]",
+    "connStringTail": "[concat(variables('connStringMiddle'), variables('connStringSuffix'))]"
   },
   "resources": [
     {
@@ -79,7 +88,7 @@
           }
         },
         {
-          "name": "[parameters('sqlDatabaseName')]",
+          "name": "[variables('databaseName')]",
           "type": "databases",
           "location": "[resourceGroup().location]",
           "apiVersion": "2014-04-01-preview",
@@ -97,6 +106,56 @@
           }
         }
       ]
-    }],
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults",
+      "name": "[variables('vaultName')]",
+      "apiVersion": "2016-10-01",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "ConfigurationKeyVault"
+      },
+      "properties": {
+        "tenantId": "[subscription().tenantId]",
+        "accessPolicies": [
+          {
+            "tenantId": "[subscription().tenantId]",
+            "objectId": "[parameters('appObjectId')]",
+            "permissions": {
+              "keys": [],
+              "secrets": [
+                "Get",
+                "List"
+              ],
+              "certificates": []
+            }
+          }
+        ],
+        "sku": {
+          "name": "standard",
+          "family": "A"
+        },
+        "enabledForDeployment": false,
+        "enabledForDiskEncryption": false,
+        "enabledForTemplateDeployment": false
+      },
+      "dependsOn": [
+        "[variables('databaseName')]"
+      ],
+      "resources": [
+        {
+          "type": "secrets",
+          "name": "database-conn-string",
+          "apiVersion": "2016-10-01",
+          "properties": {
+            "value": "[concat('Server=tcp:', reference(resourceId('Microsoft.Sql/servers/', parameters('sqlserverName'))).fullyQualifiedDomainName, variables('connStringTail'))]"
+          },
+          "dependsOn": [
+            "[variables('vaultName')]"
+          ]
+        }
+      ]
+    }
+  ],
   "outputs": {}
 }
