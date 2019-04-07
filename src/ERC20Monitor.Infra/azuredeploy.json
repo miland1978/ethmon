@@ -49,7 +49,7 @@
     },
     "envName": {
       "type": "string",
-      "minLength": 3
+      "minLength": 5
     }
   },
   "variables": {
